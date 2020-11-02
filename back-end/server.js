@@ -11,10 +11,32 @@ const morgan = require('morgan');
 app.use(morgan('dev'));
 
 
-//PARSER
+
+//COOKIE PARSER
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+
+
+//EXPRESS SESSION
+const expressSession = require('express-session');
+app.use(expressSession({secret:"some-secret-token"}));
+
+
+//BODY PARSER
 const bodyParser = require('body-parser');
 app.use(bodyParser.json()) //parse aplicattion json
 app.use(bodyParser.urlencoded({extended : false}))
+
+
+
+//PASSPORT SETTINGS
+const passport = require('passport');
+const { configPassport } = require('./config/passport/passport');
+configPassport(passport); //configuramos passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 
 //CORS
@@ -34,8 +56,10 @@ app.use('/public',express.static(path.join(__dirname,'public')));
 
 
 //RUTAS
-const {movieApi} = require('./routes/movies'); //busco las rutas de las peliculas y se la agrego a la app
+const {movieApi} = require('./routes/movies/movies'); //busco las rutas de las peliculas y se la agrego a la app
 movieApi(app);
+const { usersApi } = require('./routes/users/users');
+usersApi(app,passport);
 
 
 
@@ -54,7 +78,6 @@ movieApi(app);
 //Desplegar Servidor
 app.listen(config.port, () => {
 
-    console.log(`\n\n Servidor Corriendo \n\n`);
-    console.log(`ruta: http://localhost:${config.port}`);
+    console.log(`server running on port: http://localhost:${config.port}`);
 
 });
