@@ -39,11 +39,22 @@ movieApi(app);
 
 
 
+//Errores
+    //page not found
+    const { notFound } = require('./utils/middlewares/errors/notFound');
+    app.use(notFound);
+    //log errores
+    const { logErrors } = require('./utils/middlewares/errors/logErrors');
+    app.use(logErrors);
+    //error handler 
+    const { errorHandler } = require('./utils/middlewares/errors/errorHandler');
+    app.use(errorHandler);
 
 
 //Desplegar Servidor
 app.listen(config.port, () => {
 
+    console.log(`\n\n Servidor Corriendo \n\n`);
     console.log(`ruta: http://localhost:${config.port}`);
 
 });
