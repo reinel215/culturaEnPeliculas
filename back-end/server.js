@@ -25,7 +25,6 @@ app.use(cookieParser());
 
 //EXPRESS SESSION
 const expressSession = require('express-session');
-app.set('trust proxy', 1)
 let sessionOptions;
 
 if (config.dev) {
@@ -38,16 +37,19 @@ if (config.dev) {
 
 } else {
 
+    app.set('trust proxy', 1)
     sessionOptions = {
         secret: config.token,
         resave: false,
         saveUninitialized: false,
         unset: 'destroy',
         cookie: {
-            sameSite: 'Lax',
+            sameSite: true,
             maxAge: 60000,
-            secure: true
-        }
+            secure: true,
+            httpOnly : true
+        },
+        name : "some session name"
 
     }
 
