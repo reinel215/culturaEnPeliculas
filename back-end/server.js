@@ -47,7 +47,6 @@ if (config.dev) {
         cookie: {
             sameSite: true,
             maxAge: 60000,
-            secure: true,
         },
         name : "peliCultura"
 
