@@ -40,9 +40,9 @@ if (config.dev) {
 
     sessionOptions = {
         secret: config.token,
-        resave: false,
+        resave: true,
         proxy : true,
-        saveUninitialized: false,
+        saveUninitialized: true,
         unset: 'destroy',
         cookie: {
             sameSite: 'Lax',
@@ -52,7 +52,7 @@ if (config.dev) {
 
     }
 
-}
+};
 app.use(expressSession(sessionOptions));
 
 
