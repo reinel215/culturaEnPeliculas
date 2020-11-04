@@ -25,7 +25,7 @@ app.use(cookieParser());
 
 //EXPRESS SESSION
 const expressSession = require('express-session');
-app.set('trust proxy', 1)
+app.enable('trust proxy');
 let sessionOptions;
 
 if (config.dev) {
