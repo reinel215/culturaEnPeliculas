@@ -43,6 +43,7 @@ if (config.dev) {
         resave: false,
         saveUninitialized: false,
         unset: 'destroy',
+        proxy : true,
         cookie: {
             sameSite: true,
             maxAge: 60000,
