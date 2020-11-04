@@ -40,7 +40,7 @@ if (config.dev) {
     app.set('trust proxy', 1)
     sessionOptions = {
         secret: config.token,
-        resave: false,
+        resave: true,
         saveUninitialized: false,
         unset: 'destroy',
         proxy : true,
