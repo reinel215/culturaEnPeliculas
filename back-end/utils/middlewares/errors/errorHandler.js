@@ -2,8 +2,9 @@
 
 const errorHandler = (err, req , res , next) => {
 
-
+    console.log("************************error handler");
     console.log(req.session.cookie);
+    console.log(req.isAuthenticated());
 
     //voy a verificar las cabezeras
 

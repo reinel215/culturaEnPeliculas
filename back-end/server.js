@@ -48,7 +48,6 @@ if (config.dev) {
             sameSite: true,
             maxAge: 60000,
             secure: true,
-            httpOnly: false
         },
         name : "peliCultura"
 
