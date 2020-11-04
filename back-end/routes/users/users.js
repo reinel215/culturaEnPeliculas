@@ -22,9 +22,9 @@ const usersApi = (app,passport) => {
 
 
 
-    //ejemplo para autorizar 
-    router.post("/home", isAuth ,(req,res,next) => {
 
+    //ejemplo para restringir 
+    router.post("/home", isAuth ,(req,res,next) => {
         res.send("Home");
     })
 
