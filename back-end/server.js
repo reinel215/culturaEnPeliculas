@@ -41,6 +41,7 @@ if (config.dev) {
     sessionOptions = {
         secret: config.token,
         resave: false,
+        proxy : true,
         saveUninitialized: false,
         unset: 'destroy',
         cookie: {
