@@ -48,9 +48,8 @@ if (config.dev) {
             sameSite: true,
             maxAge: 60000,
             secure: true,
-            httpOnly : true
         },
-        name : "some session name"
+        name : "peliCultura"
 
     }
 
