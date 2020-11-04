@@ -2,6 +2,9 @@
 
 const errorHandler = (err, req , res , next) => {
 
+
+    console.log(req.session.cookie);
+
     //voy a verificar las cabezeras
 
     if(res.headersSent){
