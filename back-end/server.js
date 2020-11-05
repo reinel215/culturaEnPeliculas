@@ -25,7 +25,6 @@ app.use(cookieParser());
 
 //EXPRESS SESSION
 const expressSession = require('express-session');
-app.enable('trust proxy');
 let sessionOptions;
 
 if (config.dev) {
@@ -38,17 +37,24 @@ if (config.dev) {
 
 } else {
 
+    const { PostgreLib } = require('./lib/postgres/postgresLib');
+    const pglib = new PostgreLib();
+
+    app.set('trust proxy', 1)
     sessionOptions = {
         secret: config.token,
         resave: true,
         proxy : true,
         saveUninitialized: true,
         unset: 'destroy',
+        proxy : true,
+        store : pglib.sessionHandler(expressSession),
         cookie: {
-            sameSite: 'Lax',
+            sameSite: 'lax',
             maxAge: 60000,
-            secure: true
-        }
+            secure : true
+        },
+        name : "peliCultura"
 
     }
 
@@ -58,6 +64,13 @@ app.use(expressSession(sessionOptions));
 
 
 
+//PASSPORT SETTINGS
+const passport = require('passport');
+const { configPassport } = require('./config/passport/passport');
+configPassport(passport); //configuramos passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 
 //BODY PARSER
@@ -66,13 +79,6 @@ app.use(bodyParser.json()) //parse aplicattion json
 app.use(bodyParser.urlencoded({ extended: false }))
 
 
-
-//PASSPORT SETTINGS
-const passport = require('passport');
-const { configPassport } = require('./config/passport/passport');
-configPassport(passport); //configuramos passport
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 
@@ -116,7 +122,6 @@ const { logErrors } = require('./utils/middlewares/errors/logErrors');
 app.use(logErrors);
 //error handler 
 const { errorHandler } = require('./utils/middlewares/errors/errorHandler');
-const { type } = require('os');
 app.use(errorHandler);
 
 
