@@ -49,7 +49,7 @@ if (config.dev) {
         proxy : true,
         store : pglib.sessionHandler(expressSession),
         cookie: {
-            sameSite: true,
+            sameSite: 'lax',
             maxAge: 60000,
             secure : true
         },
