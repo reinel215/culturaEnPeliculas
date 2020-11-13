@@ -1,13 +1,14 @@
 credenciales base heroku para PgAdmin
 
 General:
-Name = cultura-en-peliculas.db
+Name = cultura-en-peliculas-bd
 
 Connection:
-Hostname/address = ec2-107-22-241-205.compute-1.amazonaws.com
+Hostname/address = ec2-52-207-124-89.compute-1.amazonaws.com
 Port = 5432
-Maintenance database = ddbitc6jra1pqo
-Username = ugcuguxhmeadyz
+Maintenance database = d2l3rvml7ii0nd
+Username = fmphpqmebkbejl
+Password = ff1e66ce9ab7e8d7fce99d76f04b9f614264dcccc3078e010eb77fe1d5558336
 
 Advanced:
-DB restriction = ddbitc6jra1pqo
+DB restriction = d2l3rvml7ii0nd
