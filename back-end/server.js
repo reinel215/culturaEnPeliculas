@@ -37,7 +37,7 @@ if (config.dev) {
 
 } else {
 
-    const { PostgreLib } = require('./lib/postgres/postgresLib');
+    const { PostgreLib } = require('./lib/postgres/PostgreLib');
     const pglib = new PostgreLib();
 
     app.set('trust proxy', 1)

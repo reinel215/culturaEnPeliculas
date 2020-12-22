@@ -1,5 +1,5 @@
 const { strategy } = require('./local');
-const { UserService } = require('../../services/users/users');
+const { UserService } = require('../../services/users/userService');
 const userService = new UserService();
 
 //este archivo va a configurar passport; el serialize, el deserialize y la estrategia

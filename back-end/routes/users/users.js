@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { UserService } = require('../../services/users/users');
+const { UserService } = require('../../services/users/userService');
 const { isAuth } = require('../../utils/middlewares/auth/auth');
 const { config } = require('../../config/config');
 
@@ -20,13 +20,32 @@ const usersApi = (app,passport) => {
     } )
 
 
-
-
-
     //ejemplo para restringir 
     router.post("/home", isAuth ,(req,res,next) => {
         res.send("Home");
     })
+
+
+
+
+    router.post('/register', async (req,res,next) => {
+
+        try {
+            const user = req.body;   
+            
+            let result = await userService.registrarUsuario(user);
+
+            res.status(201).json(result);
+
+
+        } catch (error) {
+            next(error);
+        }
+
+    })
+
+
+
 
 }
 

@@ -7,7 +7,28 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 
 
+//import DAO 
+const UserDAO = require('../../DAO/UserDAO/UserDAO');
+
+
+
 class UserService {
+
+
+    constructor(){
+
+        this.userDAO = new UserDAO();
+
+    }
+
+
+
+    async registrarUsuario(user){
+
+        let result = await this.userDAO.registrar(user);
+        return result;
+
+    }
 
 
     async login(username, password) {
