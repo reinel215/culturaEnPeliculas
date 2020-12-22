@@ -60,3 +60,16 @@ CREATE TABLE PERSONAJE(
     actor_id    INTEGER     NOT NULL REFERENCES ACTOR(id),
     UNIQUE(nombre, pelicula_id, actor_id)
 );
+
+
+
+CREATE TABLE "session" (
+  "sid" varchar NOT NULL COLLATE "default",
+	"sess" json NOT NULL,
+	"expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+CREATE INDEX "IDX_session_expire" ON "session" ("expire");
