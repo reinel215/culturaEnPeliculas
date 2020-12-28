@@ -1,6 +1,4 @@
-select registrar_usuario('eeze','dss','dss','F','dss','dss')
-
-DROP FUNCTION registrar_usuario
+DROP FUNCTION IF EXISTS registrar_usuario;
 CREATE OR REPLACE FUNCTION registrar_usuario(
     _usuario     VARCHAR(20),
     _correo      VARCHAR(30),
