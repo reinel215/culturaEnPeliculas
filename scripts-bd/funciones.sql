@@ -47,6 +47,26 @@ BEGIN
 	INSERT INTO CRITICA(mensaje, pelicula_id, usuario_id) 
 	VALUES(_mensaje, pelicula_id, usuario_id);
 	
-	RETURN 'REGISTRO DE USUARIO EXITOSO';
+	RETURN 'REGISTRO DE CRITICA EXITOSO';
+END;
+$$ LANGUAGE plpgsql;
+
+DROP FUNCTION IF EXISTS registrar_valoracion;
+CREATE OR REPLACE FUNCTION registrar_valoracion(
+    _numero_estrellas INTEGER,
+    pelicula_clave    VARCHAR,
+    _usuario          VARCHAR(20)
+) RETURNS VARCHAR AS $$
+DECLARE
+    pelicula_id INTEGER;
+    usuario_id  INTEGER;
+BEGIN
+    SELECT registrar_pelicula(pelicula_clave) INTO pelicula_id;
+	SELECT id INTO usuario_id FROM USUARIO WHERE usuario = _usuario;
+
+	INSERT INTO VALORACION(numero_estrellas, pelicula_id, usuario_id) 
+	VALUES(_numero_estrellas, pelicula_id, usuario_id);
+	
+	RETURN 'REGISTRO DE VALORACION EXITOSO';
 END;
 $$ LANGUAGE plpgsql;
