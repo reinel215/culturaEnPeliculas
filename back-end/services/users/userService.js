@@ -34,25 +34,11 @@ class UserService {
     async login(username, password) {
 
         try {
-
-
-
-            const data = await readFile('user.json');
-
-
-            const content = JSON.parse(data);
-
-            const user = content.user;
-
-            if ((user.username == username) && (user.password == password)) {
-
-                console.log(`el usuario: ${username} ha iniciado sesion`);
-                return user;
-
-
+            let result = await this.userDAO.login({username, password});
+            if (result) {
+                return 'Login de usuario exitoso'
             } else {
-
-                throw new Error("usuario invalido");
+                throw new Error("Login de usuario fallido");
             }
 
         } catch (error) {
@@ -61,43 +47,6 @@ class UserService {
         }
 
     }
-
-
-
-
-
-
-
-
-    async getUser(id){
-
-        try {
-
-
-            const data = await readFile('user.json');
-
-
-            const content = JSON.parse(data);
-
-            const user = content.user;
-
-            if (user.id == id)
-                return user
-            else
-                throw new Error("ese usuario no esta en la base de datos")
-
-
-        } catch (error) {
-
-            throw error;
-            
-        }
-
-
-    }
-
-
-
 
 }
 

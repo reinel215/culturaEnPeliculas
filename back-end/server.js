@@ -105,8 +105,8 @@ app.use(compression());
 
 
 //RUTAS
-const { movieApi } = require('./routes/movies/movies'); //busco las rutas de las peliculas y se la agrego a la app
-movieApi(app);
+const { criticaApi } = require('./routes/critica/critica'); //busco las rutas de las peliculas y se la agrego a la app
+criticaApi(app);
 const { usersApi } = require('./routes/users/users');
 usersApi(app, passport);
 

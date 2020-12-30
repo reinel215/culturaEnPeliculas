@@ -15,6 +15,23 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP FUNCTION IF EXISTS login_usuario;
+CREATE OR REPLACE FUNCTION login_usuario(
+    _usuario     VARCHAR(20),
+    _contraseña  VARCHAR(20)
+) RETURNS BOOLEAN AS $$
+DECLARE
+    usuario_id INTEGER;
+BEGIN
+	usuario_id := (SELECT id FROM USUARIO WHERE usuario=_usuario AND contraseña=_contraseña);
+    IF usuario_id IS NOT NULL THEN
+        RETURN TRUE;
+    ELSE
+        RETURN FALSE;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
 DROP FUNCTION IF EXISTS registrar_pelicula;
 CREATE OR REPLACE FUNCTION registrar_pelicula(
     _clave VARCHAR
