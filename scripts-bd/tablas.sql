@@ -1,0 +1,39 @@
+DROP TABLE IF EXISTS VALORACION;
+DROP TABLE IF EXISTS CRITICA;
+DROP TABLE IF EXISTS PELICULA;
+DROP TABLE IF EXISTS USUARIO;
+
+CREATE TABLE IF NOT EXISTS USUARIO(
+    id            SERIAL      PRIMARY KEY,
+    usuario       VARCHAR(20) NOT NULL UNIQUE,
+    correo        VARCHAR(30) NOT NULL UNIQUE,
+    nombre        VARCHAR(20) NOT NULL,
+    genero        VARCHAR(1)  NOT NULL CHECK(genero IN ('M','F','O')),
+    contraseña    VARCHAR(20) NOT NULL,
+    ruta_imagen   VARCHAR     NOT NULL,
+    administrador BOOL        NOT NULL DEFAULT FALSE,
+    fecha         DATE        NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS PELICULA(
+    id     SERIAL  PRIMARY KEY,
+    clave  VARCHAR NOT NULL,
+    fecha  DATE    NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS CRITICA(
+    id          SERIAL  PRIMARY KEY,
+    mensaje     VARCHAR NOT NULL,
+    fecha       DATE    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    pelicula_id INTEGER NOT NULL REFERENCES PELICULA(id),
+    usuario_id  INTEGER NOT NULL REFERENCES USUARIO(id)
+);
+
+CREATE TABLE IF NOT EXISTS VALORACION(
+    id               SERIAL  PRIMARY KEY,
+    numero_estrellas INTEGER NOT NULL CHECK(numero_estrellas > 0 AND numero_estrellas < 6),
+    fecha            DATE    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    pelicula_id      INTEGER NOT NULL REFERENCES PELICULA(id),
+    usuario_id       INTEGER NOT NULL REFERENCES USUARIO(id),
+    UNIQUE(pelicula_id, usuario_id)
+);

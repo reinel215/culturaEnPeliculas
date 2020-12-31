@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const {UserService} = require('../../services/users/users');
+const {UserService} = require('../../services/users/userService');
 
 const userService = new UserService();
 

@@ -37,7 +37,7 @@ if (config.dev) {
 
 } else {
 
-    const { PostgreLib } = require('./lib/postgres/postgresLib');
+    const { PostgreLib } = require('./lib/postgres/PostgreLib');
     const pglib = new PostgreLib();
 
     app.set('trust proxy', 1)
@@ -67,10 +67,9 @@ app.use(expressSession(sessionOptions));
 //PASSPORT SETTINGS
 const passport = require('passport');
 const { configPassport } = require('./config/passport/passport');
-configPassport(passport); //configuramos passport
 app.use(passport.initialize());
 app.use(passport.session());
-
+configPassport(passport); //configuramos passport
 
 
 //BODY PARSER
@@ -106,8 +105,8 @@ app.use(compression());
 
 
 //RUTAS
-const { movieApi } = require('./routes/movies/movies'); //busco las rutas de las peliculas y se la agrego a la app
-movieApi(app);
+const { criticaApi } = require('./routes/critica/critica'); //busco las rutas de las peliculas y se la agrego a la app
+criticaApi(app);
 const { usersApi } = require('./routes/users/users');
 usersApi(app, passport);
 
