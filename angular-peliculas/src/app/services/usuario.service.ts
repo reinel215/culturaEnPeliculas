@@ -27,4 +27,17 @@ export class UsuarioService {
     return this.http.post(url , data)
   }
 
+  loginUsuario(user, contrasena) {
+    
+    let url = this.baseUrl + '/api/users/auth/login'
+
+    let data = {
+      "username": user,
+      "password": contrasena
+    }
+
+    return this.http.post(url , data)
+
+  }
+
 }

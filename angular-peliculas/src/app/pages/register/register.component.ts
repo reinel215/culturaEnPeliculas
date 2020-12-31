@@ -19,7 +19,8 @@ export class RegisterComponent  {
     user : ['', Validators.required],
     correo : ['', Validators.required],
     nombre : ['', Validators.required],
-    genero : ['', Validators.required],
+    masculino : [false, Validators.required],
+    femenino : [false, Validators.required],
     contrasena : ['', Validators.required]
 
   })
@@ -31,7 +32,16 @@ export class RegisterComponent  {
   ) { }
 
   hacerRegister() {
-    this._usuarioService.RegistrarPersona(this.RegisterForm.value.user, this.RegisterForm.value.correo, this.RegisterForm.value.nombre, this.RegisterForm.value.genero, this.RegisterForm.value.contrasena)
+    let genero
+
+    console.log(this.RegisterForm.value)
+    if (this.RegisterForm.value.masculino == true) {
+      genero = 'M'
+    } else {
+      genero = 'F'
+    }
+       
+    this._usuarioService.RegistrarPersona(this.RegisterForm.value.user, this.RegisterForm.value.correo, this.RegisterForm.value.nombre, genero, this.RegisterForm.value.contrasena)
       .subscribe((data: any) => {
         swal.fire({
           title: 'Registro exitoso',
@@ -54,7 +64,7 @@ export class RegisterComponent  {
   }
 
   volver() {
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']) 
   }
 
 }

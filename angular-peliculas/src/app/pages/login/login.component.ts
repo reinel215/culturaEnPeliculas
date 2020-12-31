@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+
 import { Router } from '@angular/router';
+
+import { UsuarioService } from '../../services/usuario.service';
+
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -20,12 +25,23 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private _usuarioService: UsuarioService
   ) { }
 
   hacerLogi() {
-    console.log(this.loginForm.value)
-    this.router.navigate(['/home'])
+    this._usuarioService.loginUsuario(this.loginForm.value.user, this.loginForm.value.contrasena )
+        .subscribe((data: any) => {
+          if (data == 'LOGIN DE USUARIO EXISTOSO') {
+            this.router.navigate(['/home'])
+          } else {
+            swal.fire({
+              title: 'Error en login',
+              text: 'Combinacion usuario contraseña invalida',
+              icon: 'error',
+            });
+          }
+        })
   }
 
 }
