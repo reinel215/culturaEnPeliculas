@@ -66,10 +66,9 @@ app.use(expressSession(sessionOptions));
 //PASSPORT SETTINGS
 const passport = require('passport');
 const { configPassport } = require('./config/passport/passport');
-configPassport(passport); //configuramos passport
 app.use(passport.initialize());
 app.use(passport.session());
-
+configPassport(passport); //configuramos passport
 
 
 //BODY PARSER
