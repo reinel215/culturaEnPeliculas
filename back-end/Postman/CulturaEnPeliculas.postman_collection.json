@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"user3\", \n    \"mail\": \"correo3\", \n    \"name\": \"nombre3\", \n    \"gender\": \"M\", \n    \"password\": \"pass3\", \n    \"url_image\": \"img3\"\n}",
+					"raw": "{\n    \"username\": \"user51\", \n    \"mail\": \"correo51\", \n    \"name\": \"nombre3\", \n    \"gender\": \"M\", \n    \"password\": \"pass3\", \n    \"url_image\": \"img3\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -63,7 +63,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\" : \"reinel\",\n    \"password\" : \"1234\",\n    \"id\": \"10\"\n}",
+					"raw": "{\n    \"username\" : \"ee2ze\",\n    \"password\" : \"dss\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

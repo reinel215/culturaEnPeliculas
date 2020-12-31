@@ -23,12 +23,22 @@ CREATE OR REPLACE FUNCTION login_usuario(
 DECLARE
     usuario_id INTEGER;
 BEGIN
-	usuario_id := (SELECT id FROM USUARIO WHERE usuario=_usuario AND contraseña=_contraseña);
-    IF usuario_id IS NOT NULL THEN
+    SELECT U.id INTO usuario_id FROM USUARIO U WHERE U.usuario=_usuario AND U.contraseña=_contraseña;
+    IF FOUND THEN
         RETURN TRUE;
-    ELSE
+    ELSE 
         RETURN FALSE;
     END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP FUNCTION IF EXISTS get_user_by_id;
+CREATE OR REPLACE FUNCTION get_user_by_id(
+    _id INTEGER
+) RETURNS TABLE(id INTEGER, usuario VARCHAR(20)) AS $$
+DECLARE
+BEGIN
+	RETURN QUERY SELECT U.id, U.usuario FROM USUARIO U WHERE U.id=_id;
 END;
 $$ LANGUAGE plpgsql;
 
